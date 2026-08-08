@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distance from University</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .small-container{width:400px;margin:80px auto;background:white;padding:20px;border-radius:10px;box-shadow:0 0 10px gray;text-align:center;}
+        .small-container input{width:90%;padding:10px;margin:10px 0;font-size:16px;border:1px solid #ccc;border-radius:5px;}
+        #result{margin-top:20px;font-size:20px;font-weight:bold;color:#003366;}
+    </style>
+    <script>
+        function calculateDistance(){
+            var x = document.getElementById("x").value;
+            var y = document.getElementById("y").value;
+            if(x === "" || y === ""){
+                alert("Please enter both X and Y coordinates.");
+                return;
+            }
+            if(isNaN(x) || isNaN(y)){
+                alert("Please enter valid numbers.");
+                return;
+            }
+            x = Number(x);
+            y = Number(y);
+            var distance = Math.sqrt((x*x) + (y*y));
+            document.getElementById("result").innerHTML = "Distance from University = " + distance.toFixed(2) + " km";
+        }
+    </script>
+</head>
+<body>
+<div class="small-container">
+    <h2>Distance from University</h2>
+    <p>Enter your X and Y coordinates.</p>
+    <input type="number" id="x" placeholder="Enter X Coordinate">
+    <input type="number" id="y" placeholder="Enter Y Coordinate">
+    <br>
+    <button onclick="calculateDistance()">Calculate Distance</button>
+    <button onclick="window.location.href='resume.html'">Back</button>
+    <p id="result"></p>
+</div>
+</body>
+</html>
