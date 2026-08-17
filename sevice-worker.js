@@ -1,20 +1,30 @@
-const CACHE_NAME = "shreja-pwa-v1";
+const CACHE_NAME = "shreja-pwa-v2";
 
 const urlsToCache = [
   "/Shreja/",
   "/Shreja/index.html",
   "/Shreja/style.css",
-  "/Shreja/Change.html",
-  "/Shreja/Converter.html",
-  "/Shreja/Distance.html",
-  "/Shreja/Grading.html",
-  "/Shreja/hobbies.html"
+  "/Shreja/icons/icon-192.png",
+  "/Shreja/icons/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(name => name !== CACHE_NAME)
+          .map(name => caches.delete(name))
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
